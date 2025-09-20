@@ -1,0 +1,15 @@
+RewriteEngine On
+
+# Don’t apply redirects on localhost or 127.0.0.1
+RewriteCond %{HTTP_HOST} ^localhost$ [NC,OR]
+RewriteCond %{HTTP_HOST} ^127\.0\.0\.1$
+RewriteRule ^ - [L]
+
+# Redirect www to non-www with HTTPS (live site only)
+RewriteCond %{HTTP_HOST} ^www\.paraskaushal\.com$ [NC]
+RewriteRule ^(.*)$ https://paraskaushal.com/$1 [L,R=301]
+
+# Force HTTPS for non-www (live site only)
+RewriteCond %{HTTP_HOST} ^paraskaushal\.com$ [NC]
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://paraskaushal.com/$1 [L,R=301]

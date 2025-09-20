@@ -1,0 +1,29 @@
+# Robots.txt for https://www.paraskaushal.com/
+# Last Updated: 2025-09-01
+
+# Allow all search engines
+User-agent: *
+Disallow: /admin/
+Disallow: /tmp/
+Disallow: /test/
+Disallow: /private/
+
+# Allow CSS, JS, and images (important for SEO rendering)
+Allow: /*.css$
+Allow: /*.js$
+Allow: /img/
+
+# ✅ Allow files in /watches/
+Allow: /watches/
+Allow: /watches/*.html$
+Allow: /watches/*.css$
+Allow: /watches/*.js$
+
+# ✅ Allow files in /cards/
+Allow: /cards/
+Allow: /cards/*.html$
+Allow: /cards/*.css$
+Allow: /cards/*.js$
+
+# Sitemap (replace with your actual sitemap URL)
+Sitemap: https://www.paraskaushal.com/sitemap.xml

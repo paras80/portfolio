@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Paras Kaushal — a skilled web developer specializing in PHP, HTML, CSS, JavaScript, Node.js, and Express.js. Discover projects, expertise, and contact information.">
+
+    <link rel="canonical" href="https://paraskaushal.com/">
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+
+    <!-- Robots tag: allows indexing and link following -->
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph for better social sharing -->
+    <meta property="og:title" content="Full Stack Web Developer | PHP| Express JS | Node JS | MY SQL | HTML |Javascript| TAILWIND| CSS">
+    <meta property="og:description" content="Hi, I'm passionate Developer. Self learned and mastered the web skills. I have more than 10+ years experience of Creating, Modifying, Fixing Websites, Plugins, Themes, Scripts or any kind of code.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://paraskaushal.com/">
+    <meta property="og:image" content="https://paraskaushal.com/og-image.jpg">
+
+    <!-- Twitter Card tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Paras Kaushal Twitter">
+    <meta name="twitter:description" content="https://x.com/paraskaushal80">
+    <meta name="twitter:image" content="https://paraskaushal.com/og-image.jpg">
+
+    <title>Paras Kaushal</title>
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Tailwind config: fonts & container
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+              body: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            },
+            colors: {
+              brand: {
+                50: '#eef9ff',
+                100: '#d9f0ff',
+                200: '#bde5ff',
+                300: '#91d5ff',
+                400: '#5bc1ff',
+                500: '#2aa7ff',
+                600: '#1787db',
+                700: '#156db1',
+                800: '#155a8f',
+                900: '#134b75',
+              },
+            },
+            boxShadow: {
+              soft: '0 10px 30px -12px rgba(2, 6, 23, 0.25)'
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- Inter font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Hero Icons -->
+    <script src="https://unpkg.com/heroicons@2.0.18/24/outline/index.js" type="module"></script>
+
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Paras Kaushal",
+      "url": "https://paraskaushal.com",
+      "sameAs": [
+        "https://github.com/",
+        "https://www.linkedin.com/in/",
+        "https://x.com/"
+      ],
+      "jobTitle": "Full‑Stack Web Developer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Independent"
+      }
+    }
+    </script>
+
+    <style>
+      /* Smooth fade-up animation */
+      @keyframes fadeUp { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: translateY(0);} }
+      .reveal { opacity: 0; animation: fadeUp .7s ease forwards; }
+      .reveal.delay-1 { animation-delay: .1s; }
+      .reveal.delay-2 { animation-delay: .2s; }
+      .reveal.delay-3 { animation-delay: .3s; }
+      .reveal.delay-4 { animation-delay: .4s; }
+    </style>
+  </head>
+  <body class="bg-white text-slate-800 dark:bg-slate-950 dark:text-slate-100 font-body">
+    <!-- Theme + Mobile menu helpers -->
+    <script>
+      // Theme persistence
+      const userPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+      const storedTheme = localStorage.getItem('theme')
+      if ((storedTheme === 'dark') || (!storedTheme && userPrefersDark)) {
+        document.documentElement.classList.add('dark')
+      }
+      function toggleTheme() {
+        const isDark = document.documentElement.classList.toggle('dark')
+        localStorage.setItem('theme', isDark ? 'dark' : 'light')
+      }
+      function toggleMenu() {
+        document.getElementById('mobileMenu').classList.toggle('hidden')
+      }
+    </script>
+
+    <!-- Top Bar / Nav -->
+    <header class="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-slate-900/60 border-b border-slate-900/5 dark:border-slate-50/10">
+      <nav class="mx-auto container px-4 sm:px-6 lg:px-8">
+        <div class="flex h-16 items-center justify-between">
+          <a href="#home" class="flex items-center gap-3 group">
+            <span class="grid place-items-center h-9 w-9 rounded-xl bg-brand-500/10 text-brand-600 dark:text-brand-400 shadow-soft group-hover:scale-105 transition">
+              <img src="img/favicon.png" alt="Paras Kaushal" class="w-full h-full object-cover">
+              </span>
+            </span>
+            <span class="font-display font-semibold tracking-tight text-lg">Paras Kaushal</span>
+          </a>
+          <div class="hidden md:flex items-center gap-8">
+            <a href="#about" class="hover:text-brand-600 dark:hover:text-brand-400">About</a>
+            <a href="#work" class="hover:text-brand-600 dark:hover:text-brand-400">Work</a>
+            <a href="#skills" class="hover:text-brand-600 dark:hover:text-brand-400">Skills</a>
+            <a href="#blog" class="hover:text-brand-600 dark:hover:text-brand-400">Blog</a>
+            <a href="#contact" class="hover:text-brand-600 dark:hover:text-brand-400">Contact</a>
+            <button aria-label="Toggle theme" onclick="toggleTheme()" class="rounded-xl border border-slate-200 dark:border-slate-700 px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-800">🌙</button>
+          </div>
+          <div class="md:hidden flex items-center gap-2">
+            <button aria-label="Toggle theme" onclick="toggleTheme()" class="rounded-xl border border-slate-200 dark:border-slate-700 px-3 py-2">🌙</button>
+            <button aria-label="Open menu" onclick="toggleMenu()" class="rounded-xl border border-slate-200 dark:border-slate-700 px-3 py-2">☰</button>
+          </div>
+        </div>
+        <div id="mobileMenu" class="md:hidden hidden pb-4">
+          <div class="flex flex-col gap-2 pt-2">
+            <a href="#about" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">About</a>
+            <a href="#work" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Work</a>
+            <a href="#skills" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Skills</a>
+            <a href="#blog" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Blog</a>
+            <a href="#contact" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Contact</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section id="home" class="relative overflow-hidden">
+      <div class="absolute inset-0 -z-10 bg-gradient-to-b from-brand-50 to-transparent dark:from-brand-900/10"></div>
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div class="grid lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-7 reveal">
+            <h1 class="font-display text-4xl sm:text-5xl/tight md:text-6xl/tight font-extrabold tracking-tight">
+              Hi, I'm <span class="text-brand-600 dark:text-brand-400">Paras</span> — I build fast, clean web apps.
+            </h1>
+            <p class="mt-6 text-lg text-slate-600 dark:text-slate-300 max-w-2xl">
+            Hi, I'm passionate Developer. Self learned and mastered the web skills. I have more than 10+ years experience of Creating, Modifying, Fixing Websites, Plugins, Themes, Scripts or any kind of code.            </p>
+            <div class="mt-8 flex flex-wrap gap-4">
+              <a href="#work" class="inline-flex items-center gap-2 rounded-2xl bg-brand-600 px-5 py-3 text-white shadow-soft hover:-translate-y-0.5 transition">
+                <span>View Projects</span> <span>↗</span>
+              </a>
+              <a href="#contact" class="inline-flex items-center gap-2 rounded-2xl border border-slate-300 dark:border-slate-700 px-5 py-3 hover:bg-slate-100 dark:hover:bg-slate-800">
+                <span>Contact Me</span>
+              </a>
+            </div>
+            <div class="mt-10 flex items-center gap-6 text-slate-500 dark:text-slate-400">
+              <a href="https://x.com/paraskaushal80" target="_blank" rel="noopener noreferrer" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors" aria-label="Twitter">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+              <a href="https://github.com/paras80" target="_blank" rel="noopener noreferrer" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors" aria-label="GitHub">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+              </a>
+              <a href="https://www.linkedin.com/in/paras-kaushal-b22a2212b/" target="_blank" rel="noopener noreferrer" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors" aria-label="LinkedIn">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </a>
+              <a href="https://www.behance.net/paraskaushal80" target="_blank" rel="noopener noreferrer" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors" aria-label="Behance">
+               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+              <path stroke-linejoin="round" d="M6.75 3.744h-.753v8.25h7.125a4.125 4.125 0 0 0 0-8.25H6.75Zm0 0v.38m0 16.122h6.747a4.5 4.5 0 0 0 0-9.001h-7.5v9h.753Zm0 0v-.37m0-15.751h6a3.75 3.75 0 1 1 0 7.5h-6m0-7.5v7.5m0 0v8.25m0-8.25h6.375a4.125 4.125 0 0 1 0 8.25H6.75m.747-15.38h4.875a3.375 3.375 0 0 1 0 6.75H7.497v-6.75Zm0 7.5h5.25a3.75 3.75 0 0 1 0 7.5h-5.25v-7.5Z" />
+            </svg>
+
+              </a>
+              <a href="https://www.fiverr.com/paraskaushal" target="_blank" rel="noopener noreferrer" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors" aria-label="Fiverr">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z" />
+</svg>
+
+              </a>
+              <a href="https://www.upwork.com/freelancers/~0155306c60a1a9109b" target="_blank" rel="noopener noreferrer" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors" aria-label="Upwork">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.561 13.158c-1.102 0-2.135-.467-3.074-1.227l.228-1.076.008-.042c.207-1.143.849-3.06 2.839-3.06 1.492 0 2.703 1.212 2.703 2.703 0 1.491-1.212 2.702-2.704 2.702zm0-8.14c-2.539 0-4.51 1.649-5.31 4.366-1.22-1.834-2.148-4.036-2.687-5.892H7.828v7.112c-.002 1.406-1.141 2.546-2.547 2.548-1.405-.002-2.543-1.143-2.545-2.548V3.492H0v7.112c0 2.914 2.37 5.303 5.281 5.303 2.913 0 5.283-2.389 5.283-5.303v-1.19c.529 1.107 1.182 2.229 1.974 3.221l-1.673 7.873h2.797l1.213-5.71c1.063.679 2.285 1.109 3.686 1.109 3 0 5.439-2.452 5.439-5.45 0-3-2.439-5.439-5.439-5.439z"/>
+                </svg>
+              </a>
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=paraskaushal@gmail.com&su=Hello+Paras&body=Hi+Paras,+I+am+contacting+you+regarding+your+website.
+" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors" aria-label="Email">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="lg:col-span-5 reveal delay-2">
+            <div class="relative mx-auto w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72">
+              <div class="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-brand-500 to-brand-700 blur-2xl opacity-20"></div>
+          <a href="https://wa.me/919034430071"><img src="img/whatsapp-icon.png" alt="Whatsapp Icon" class="relative w-full h-full object-cover rounded-[2rem] shadow-soft border border-slate-200 dark:border-slate-700" />
+          </a>
+            </div>
+            <p class="mt-6 text-center text-sm text-slate-500 dark:text-slate-400">Open for freelance & collaborations.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="py-20">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-12 gap-10 items-start">
+          <div class="lg:col-span-5 reveal">
+            <h2 class="text-3xl font-bold tracking-tight">About</h2>
+            <p class="mt-4 text-slate-600 dark:text-slate-300">
+            Hi, I'm passionate Developer. Self learned and mastered the web skills. I have more than 10+ years experience of Creating, Modifying, Fixing Websites, Plugins, Themes, Scripts or any kind of code.</p>
+            <div class="mt-6 grid grid-cols-2 gap-4 text-sm">
+              <div class="p-4 rounded-2xl border border-slate-200 dark:border-slate-700">
+                <div class="text-2xl font-bold">10+<span class="text-brand-600 dark:text-brand-400"> years</span></div>
+                <div class="text-slate-500">Experience</div>
+              </div>
+              <div class="p-4 rounded-2xl border border-slate-200 dark:border-slate-700">
+                <div class="text-2xl font-bold">30+<span class="text-brand-600 dark:text-brand-400"> projects</span></div>
+                <div class="text-slate-500">Delivered</div>
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-7 reveal delay-2">
+            <ol class="relative border-s border-l border-slate-200 dark:border-slate-700 pl-6">
+              <li class="mb-8">
+                <div class="absolute -left-3 top-1.5 h-2.5 w-2.5 rounded-full bg-brand-600"></div>
+                <h3 class="font-semibold">Senior Frontend Engineer</h3>
+                <p class="text-sm text-slate-500">2020 — Present</p>
+                <p class="mt-2 text-slate-600 dark:text-slate-300">Lead UI for dashboard used by 50k+ users.</p>
+              </li>
+              <li class="mb-8">
+                <div class="absolute -left-3 top-1.5 h-2.5 w-2.5 rounded-full bg-brand-600"></div>
+                <h3 class="font-semibold">Full‑Stack Developer — Freelance</h3>
+                <p class="text-sm text-slate-500">2020 — Present</p>
+                <p class="mt-2 text-slate-600 dark:text-slate-300">Built and maintained client apps (Javascript + Node + MySQL).</p>
+              </li>
+              <li>
+                <div class="absolute -left-3 top-1.5 h-2.5 w-2.5 rounded-full bg-brand-600"></div>
+                <h3 class="font-semibold">B.Sc</h3>
+                <p class="text-sm text-slate-500">2017 — 2020</p>
+                <p class="mt-2 text-slate-600 dark:text-slate-300">Graduated in Science</p>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Work / Projects -->
+    <section id="work" class="py-20 bg-slate-50 dark:bg-slate-900/50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-end justify-between gap-6">
+          <div>
+            <h2 class="text-3xl font-bold tracking-tight">Selected Work</h2>
+            <p class="mt-2 text-slate-600 dark:text-slate-300">A few projects I enjoyed building recently.</p>
+          </div>
+          <a href="#contact" class="hidden sm:inline-flex items-center gap-2 text-sm rounded-xl border border-slate-300 dark:border-slate-700 px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-800">Start a project →</a>
+        </div>
+
+        <div class="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Card -->
+          <article class="group rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 reveal">
+            <a href="#" class="block">
+              <img class="h-48 w-full object-cover group-hover:scale-[1.02] transition" src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1200&q=80&auto=format&fit=crop" alt="Dashboard app" />
+            </a>
+            <div class="p-5">
+              <div class="flex items-center gap-2 text-xs text-slate-500">
+                <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800">Node.js</span>
+                <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800">Tailwind</span>
+                <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800">MySQL</span>
+              </div>
+              <h3 class="mt-3 font-semibold text-lg">Analytics Dashboard</h3>
+              <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">A modular, themable analytics suite with real‑time charts and role-based access.</p>
+              <a href="#" class="mt-4 inline-flex items-center gap-1 text-brand-600 dark:text-brand-400">View case study ↗</a>
+            </div>
+          </article>
+
+          <article class="group rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 reveal delay-1">
+            <a href="#" class="block">
+              <img class="h-48 w-full object-cover group-hover:scale-[1.02] transition" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&q=80&auto=format&fit=crop" alt="SaaS landing page" />
+            </a>
+            <div class="p-5">
+              <div class="flex items-center gap-2 text-xs text-slate-500">
+                <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800">Tailwind</span>
+                <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800">Php</span>
+              </div>
+              <h3 class="mt-3 font-semibold text-lg">SaaS Landing + Billing</h3>
+              <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">High‑converting landing with Stripe billing, i18n, and A/B testing.</p>
+              <a href="#" class="mt-4 inline-flex items-center gap-1 text-brand-600 dark:text-brand-400">Live demo ↗</a>
+            </div>
+          </article>
+
+          <article class="group rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 reveal delay-2">
+            <a href="#" class="block">
+              <img class="h-48 w-full object-cover group-hover:scale-[1.02] transition" src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&q=80&auto=format&fit=crop" alt="Open source" />
+            </a>
+            <div class="p-5">
+              <div class="flex items-center gap-2 text-xs text-slate-500">
+                <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800">Tailwind</span>
+                <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800">Javascript</span>
+              </div>
+              <h3 class="mt-3 font-semibold text-lg">UI Component Kit</h3>
+              <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Accessible headless components with docs, stories, and tests.</p>
+              <a href="#" class="mt-4 inline-flex items-center gap-1 text-brand-600 dark:text-brand-400">GitHub ↗</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="py-20">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold tracking-tight">Skills</h2>
+        <p class="mt-2 text-slate-600 dark:text-slate-300">Tech I use day‑to‑day.</p>
+        <div class="mt-8 flex flex-wrap gap-3 text-sm">
+          <span class="px-3 py-1 rounded-full border border-slate-300 dark:border-slate-700">HTML</span>
+          <span class="px-3 py-1 rounded-full border border-slate-300 dark:border-slate-700">CSS / Tailwind</span>
+          <span class="px-3 py-1 rounded-full border border-slate-300 dark:border-slate-700">JavaScript</span>
+          <span class="px-3 py-1 rounded-full border border-slate-300 dark:border-slate-700">PHP</span>
+          <span class="px-3 py-1 rounded-full border border-slate-300 dark:border-slate-700">Node / Express</span>
+          <span class="px-3 py-1 rounded-full border border-slate-300 dark:border-slate-700">MySQL</span>
+          <span class="px-3 py-1 rounded-full border border-slate-300 dark:border-slate-700">Firebase</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-slate-50 dark:bg-slate-900/50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold tracking-tight">What clients say</h2>
+        <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <figure class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+            <blockquote class="text-slate-700 dark:text-slate-300">“Lightning‑fast delivery and pixel‑perfect implementation. Our Core Web Vitals skyrocketed.”</blockquote>
+            <figcaption class="mt-4 text-sm text-slate-500">— Priya, Product Manager</figcaption>
+          </figure>
+          <figure class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+            <blockquote class="text-slate-700 dark:text-slate-300">“Great communicator. Turned vague ideas into a polished product with docs and tests.”</blockquote>
+            <figcaption class="mt-4 text-sm text-slate-500">— Arjun, Founder</figcaption>
+          </figure>
+          <figure class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+            <blockquote class="text-slate-700 dark:text-slate-300">“Clean code, thoughtful UX, and measurable results. Highly recommended.”</blockquote>
+            <figcaption class="mt-4 text-sm text-slate-500">— Neha, CTO</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog -->
+    <section id="blog" class="py-20">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-end justify-between">
+          <div>
+            <h2 class="text-3xl font-bold tracking-tight">Latest posts</h2>
+            <p class="mt-2 text-slate-600 dark:text-slate-300">Writing on Digital Art, design and 10+ Years of Design Experience.</p>
+          </div>
+          <a href="#" class="hidden sm:inline-flex items-center gap-2 text-sm rounded-xl border border-slate-300 dark:border-slate-700 px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-800">All posts →</a>
+        </div>
+        <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <article class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 hover:shadow-soft transition">
+            <h3 class="font-semibold">Tips for Effective Branding!</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Logo Design, Digital Artist, Art Services, Vector Art, Upwork Freelancer</p>
+            <a href="#" class="mt-3 inline-flex items-center gap-1 text-brand-600 dark:text-brand-400">Read more →</a>
+          </article>
+          <article class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 hover:shadow-soft transition">
+            <h3 class="font-semibold">Freelance Graphic Designer</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Creative freelance graphic designer delivering unique visuals for brands worldwide.</p>
+            <a href="#" class="mt-3 inline-flex items-center gap-1 text-brand-600 dark:text-brand-400">Read more →</a>
+          </article>
+          <article class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 hover:shadow-soft transition">
+            <h3 class="font-semibold">Best Freelance Digital Artist</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Best freelance digital artist creating stunning designs with best illustrations.</p>
+            <a href="#" class="mt-3 inline-flex items-center gap-1 text-brand-600 dark:text-brand-400">Read more →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-20 bg-slate-50 dark:bg-slate-900/50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-12 gap-10 items-start">
+          <div class="lg:col-span-5">
+            <h2 class="text-3xl font-bold tracking-tight">Let's work together</h2>
+            <p class="mt-2 text-slate-600 dark:text-slate-300">Tell me about your project — I'll get back within 24 hours.</p>
+            <div class="mt-6 text-sm text-slate-500">
+                    <h3 class="text-sm font-semibold text-white mb-4 inline-flex justify-center items-center gap-2">Made with <svg xmlns="http://www.w3.org/2000/svg" fill="red" viewBox="0 0 24 24" stroke-width="1.5" stroke="red" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg> in India</h3>
+                    <p class="text-sm"></p>
+            </div>
+           
+          </div>
+          <div class="lg:col-span-7">
+            <form class="grid grid-cols-1 gap-4">
+              <div>
+                <label for="name" class="block text-sm mb-1">Your name</label>
+                <input id="name" type="text" class="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-3" placeholder="Jane Doe" required>
+              </div>
+              <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label for="email" class="block text-sm mb-1">Email</label>
+                  <input id="email" type="email" class="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-3" placeholder="you@company.com" required>
+                </div>
+                <div>
+                  <label for="budget" class="block text-sm mb-1">Budget</label>
+                  <select id="budget" class="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-3">
+                    <option>₹25k – ₹50k</option>
+                    <option>₹50k – ₹1L</option>
+                    <option>₹1L – ₹3L</option>
+                    <option>₹3L+</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label for="message" class="block text-sm mb-1">Message</label>
+                <textarea id="message" rows="5" class="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-3" placeholder="Project details, goals, timeline…"></textarea>
+              </div>
+              <button type="submit" class="mt-2 inline-flex items-center justify-center gap-2 rounded-2xl bg-brand-600 px-5 py-3 text-white shadow-soft hover:-translate-y-0.5 transition">
+                Send message
+              </button>
+              <p class="text-xs text-slate-500"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="py-10">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500">
+          <p>© <span id="year"></span> Paras Kaushal. All rights reserved.</p>
+          <div class="flex items-center gap-4">
+            <a href="#home" class="hover:text-brand-600 dark:hover:text-brand-400">Back to top ↑</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Set year & reveal animations on scroll
+      document.getElementById('year').textContent = new Date().getFullYear()
+      const observer = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('!opacity-100'); }})
+      }, { threshold: 0.12 })
+      document.querySelectorAll('.reveal').forEach(el=>observer.observe(el))
+    </script>
+  </body>
+</html>
