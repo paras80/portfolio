@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portfolio of Paras Kaushal — a skilled web developer specializing in PHP, HTML, CSS, JavaScript, Node.js, and Express.js. Discover projects, expertise, and contact information.">
 
-    <link rel="canonical" href="https://www.paraskaushal.com/">
+    <link rel="canonical" href="https://www.paraskaushal.vercel.app/">
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 
     <!-- Robots tag: allows indexing and link following -->
@@ -15,7 +15,7 @@
     <meta property="og:title" content="Full Stack Web Developer | PHP| Express JS | Node JS | MY SQL | HTML |Javascript| TAILWIND| CSS">
     <meta property="og:description" content="Hi, I'm passionate Developer. Self learned and mastered the web skills. I have more than 10+ years experience of Creating, Modifying, Fixing Websites, Plugins, Themes, Scripts or any kind of code.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://paraskaushal.com/">
+    <meta property="og:url" content="https://paraskaushal.vercel.app/">
     <meta property="og:image" content="https://paraskaushal.com/og-image.jpg">
 
     <!-- Twitter Card tags -->
@@ -28,7 +28,7 @@
     <link rel="icon" href="img/favicon.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
@@ -82,8 +82,8 @@
         --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.15);
 
         /* Typography */
-        --font-display: 'Inter', system-ui, -apple-system, sans-serif;
-        --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+        --font-display: 'Roboto', 'Inter', system-ui, -apple-system, sans-serif;
+        --font-body: 'Roboto', 'Inter', system-ui, -apple-system, sans-serif;
         --font-mono: 'JetBrains Mono', monospace;
 
         /* Radii */
@@ -676,6 +676,185 @@
         font-weight: 500;
         color: var(--c-text-tertiary);
         white-space: nowrap;
+      }
+
+      .king-scene {
+        position: relative;
+        width: 100%;
+        max-width: 300px;
+        height: 128px;
+        margin-top: 18px;
+        overflow: hidden;
+        border-radius: var(--radius-md);
+        background: linear-gradient(180deg, transparent 0%, var(--c-accent-soft) 100%);
+        image-rendering: pixelated;
+      }
+
+      .king-ground {
+        position: absolute;
+        left: -2%; right: -2%; bottom: 6px;
+        height: 26px;
+        background: linear-gradient(180deg, rgba(129,140,248,0.16) 0%, rgba(129,140,248,0.05) 55%, transparent 100%);
+        clip-path: polygon(0 0, 100% 0, 97% 100%, 3% 100%);
+      }
+
+      .king-ground::before {
+        content: "";
+        position: absolute;
+        left: 4%; right: 4%; top: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--c-accent), transparent);
+        box-shadow: 0 0 10px var(--c-accent-glow);
+      }
+
+      .king-ground::after {
+        content: "";
+        position: absolute;
+        left: 10%; right: 10%; top: 6px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(129,140,248,0.25), transparent);
+      }
+
+      .king-horse-zone {
+        position: absolute;
+        right: 4px;
+        bottom: 6px;
+        width: 104px;
+        height: 80px;
+        z-index: 1;
+      }
+
+      .king-horse {
+        position: absolute;
+        right: 4px;
+        bottom: 6px;
+        width: 96px;
+        height: 72px;
+        background-repeat: no-repeat;
+        background-position: bottom right;
+        background-size: 96px 72px;
+        image-rendering: pixelated;
+        opacity: 0.95;
+        filter: drop-shadow(0 2px 3px rgba(10,10,26,0.5));
+      }
+
+      .king-walker {
+        position: absolute;
+        bottom: 6px;
+        left: 2%;
+        width: 72px;
+        height: 72px;
+        z-index: 3;
+        cursor: grab;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: none;
+        will-change: transform;
+        --king-fw: 72px;
+        --king-sheet-w: 720px;
+      }
+
+      .king-walker.state-drag {
+        cursor: grabbing;
+      }
+
+      .king-walk,
+      .king-sprite {
+        position: absolute;
+        left: 0; top: 0;
+        width: 72px;
+        height: 72px;
+        background-repeat: no-repeat;
+        background-size: 72px 72px;
+        image-rendering: pixelated;
+        filter: drop-shadow(0 3px 4px rgba(10,10,26,0.45));
+        pointer-events: none;
+      }
+
+      .king-walk {
+        width: 72px;
+        background-image: url('img/pixel-king-walk-sheet.png');
+        background-size: var(--king-sheet-w) var(--king-fw);
+        opacity: 0;
+      }
+
+      .king-sprite-alert {
+        background-image: url('img/pixel-king-young-alert.png');
+        opacity: 0;
+      }
+
+      .king-sprite-rest {
+        background-image: url('img/pixel-king-young-rest.png');
+        opacity: 0;
+      }
+
+      .king-walker.state-walk .king-walk {
+        opacity: 1;
+        animation: king-walk-frames 0.8s steps(9) infinite;
+      }
+
+      .king-walker.state-idle .king-sprite-rest,
+      .king-walker.state-wave .king-sprite-alert,
+      .king-walker.state-drag .king-sprite-alert {
+        opacity: 1;
+      }
+
+      @keyframes king-walk-frames {
+        from { background-position: 0 0; }
+        to   { background-position: calc(-1 * (var(--king-sheet-w) - var(--king-fw))) 0; }
+      }
+
+      .king-mounted {
+        position: absolute;
+        left: 0; bottom: 6px;
+        width: 128px;
+        height: 112px;
+        background-image: url('img/pixel-king-mounted-sheet.png');
+        background-repeat: no-repeat;
+        background-size: 1280px 112px;
+        image-rendering: pixelated;
+        filter: drop-shadow(0 3px 5px rgba(10,10,26,0.5));
+        opacity: 0;
+        pointer-events: none;
+        z-index: 4;
+        will-change: transform;
+        --mount-fw: 128px;
+        --mount-sheet-w: 1280px;
+      }
+
+      .king-mounted.visible {
+        opacity: 1;
+        pointer-events: auto;
+        cursor: pointer;
+        animation: king-trot-frames 0.7s steps(9) infinite;
+      }
+
+      @keyframes king-trot-frames {
+        from { background-position: 0 0; }
+        to   { background-position: calc(-1 * (var(--mount-sheet-w) - var(--mount-fw))) 0; }
+      }
+
+      .king-horse-zone {
+        transition: box-shadow 0.2s ease;
+      }
+
+      .king-horse-zone.drop-hover {
+        border-radius: var(--radius-md);
+        box-shadow: inset 0 0 0 2px var(--c-accent-glow), 0 0 18px var(--c-accent-glow);
+      }
+
+      .king-horse-zone.drop-hover .king-horse {
+        opacity: 1;
+        filter: drop-shadow(0 0 6px var(--c-accent)) drop-shadow(0 2px 3px rgba(10,10,26,0.5));
+      }
+
+      @media (min-width: 768px) {
+        .king-scene { max-width: 320px; height: 140px; }
+        .king-horse-zone { right: 6px; width: 120px; height: 92px; }
+        .king-horse { right: 6px; width: 112px; height: 84px; background-size: 112px 84px; }
+        .king-walker { width: 84px; height: 84px; --king-fw: 84px; --king-sheet-w: 840px; }
+        .king-walk, .king-sprite { width: 84px; height: 84px; background-size: 84px 84px; }
+        .king-walk { background-size: var(--king-sheet-w) var(--king-fw); }
+        .king-mounted { width: 150px; height: 131px; background-size: 1500px 131px; --mount-fw: 150px; --mount-sheet-w: 1500px; }
       }
 
       /* ============================================
@@ -1468,6 +1647,18 @@
             <a href="https://wa.me/919034430071" class="hero-card" aria-label="Chat on WhatsApp">
               <svg class="hero-card-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             </a>
+            <div class="king-scene" id="kingScene" aria-hidden="true">
+              <div class="king-ground"></div>
+              <div class="king-horse-zone" id="kingHorseZone">
+                <div class="king-horse" style="background-image:url('img/pixel-horse-transparent.png')"></div>
+              </div>
+              <div class="king-walker" id="kingWalker">
+                <div class="king-walk"></div>
+                <div class="king-sprite king-sprite-alert"></div>
+                <div class="king-sprite king-sprite-rest"></div>
+              </div>
+              <div class="king-mounted" id="kingMounted"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -1774,6 +1965,8 @@
     <!-- ========================
          SCRIPTS
          ======================== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/interactjs@1.10.27/dist/interact.min.js" defer></script>
     <script>
       // ---- Theme Toggle ----
       (function() {
@@ -1846,6 +2039,186 @@
       document.querySelectorAll('.reveal').forEach(function(el) {
         revealObserver.observe(el);
       });
+
+      // ---- King scene: walk/idle/wave + drag-to-mount (GSAP + interact.js) ----
+      (function () {
+        function initKing() {
+          const scene = document.getElementById('kingScene');
+          const walker = document.getElementById('kingWalker');
+          const horseZone = document.getElementById('kingHorseZone');
+          const mountedEl = document.getElementById('kingMounted');
+          if (!scene || !walker || !horseZone || !mountedEl) return;
+
+          const walkEl = scene.querySelector('.king-walk');
+          const horseEl = scene.querySelector('.king-horse');
+          const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+          // ---- State machine (sprite/class swapping only) ----
+          const stateEls = { walk: walkEl, idle: scene.querySelector('.king-sprite-rest'), wave: scene.querySelector('.king-sprite-alert') };
+          function setState(name) {
+            walker.classList.remove('state-walk', 'state-idle', 'state-wave', 'state-drag', 'state-mounted');
+            if (name) walker.classList.add('state-' + name);
+          }
+
+          // ---- Geometry helpers ----
+          function frameW() { return walker.offsetWidth; }
+          function roamMaxPct() {
+            const r = scene.getBoundingClientRect();
+            const h = horseZone.getBoundingClientRect();
+            if (!r.width) return 40;
+            const horseLeftPx = h.left - r.left;
+            const availPx = Math.max(20, horseLeftPx - 12 - walker.offsetWidth);
+            return (availPx / r.width) * 100;
+          }
+          function resetInlineLayout() {
+            walker.style.top = '';
+            walker.style.bottom = '6px';
+            walker.style.left = '2%';
+          }
+
+          // ---- Walk / idle / wave sequence (GSAP controls timing & positioning only) ----
+          let seq = null;
+          let rideTl = null;
+          function buildSequence() {
+            seq = gsap.timeline({ repeat: -1, defaults: { ease: 'power2.inOut' } });
+            seq
+              .call(() => { setState('walk'); gsap.set(walker, { x: 0, scaleX: 1 }); })
+              .to(walker, { left: () => roamMaxPct() + '%', duration: 2.6 })
+              .call(() => setState('idle'))
+              .to({}, { duration: 1.0 })
+              .call(() => setState('wave'))
+              .to(walker, { rotation: -14, duration: 0.18, ease: 'back.out(2)' })
+              .to(walker, { rotation: 10, duration: 0.22, ease: 'power2.inOut' })
+              .to(walker, { rotation: -8, duration: 0.22, ease: 'power2.inOut' })
+              .to(walker, { rotation: 0, duration: 0.18, ease: 'back.out(2)' })
+              .call(() => { setState('walk'); gsap.set(walker, { scaleX: -1 }); })
+              .to(walker, { left: '2%', duration: 2.6 })
+              .call(() => setState('idle'))
+              .to({}, { duration: 1.2 });
+          }
+          function startSequence() {
+            if (reduceMotion) { setState('idle'); return; }
+            if (!seq) buildSequence();
+            else seq.restart();
+          }
+          function pauseSequence() { if (seq) seq.pause(); }
+
+          // ---- Mount / dismount (GSAP snap + bounce) ----
+          function mountKing() {
+            pauseSequence();
+            setState(null);
+            const s = scene.getBoundingClientRect();
+            const r = horseZone.getBoundingClientRect();
+            const h = walker.getBoundingClientRect();
+            const dx = (r.left + r.width / 2) - (h.left + h.width / 2);
+            const dy = (r.top + r.height / 2) - (h.top + h.height / 2);
+            gsap.to(walker, {
+              x: '+=' + dx,
+              y: '+=' + dy,
+              scaleX: 1,
+              duration: 0.5,
+              ease: 'back.out(1.7)',
+              onComplete: function () {
+                walker.style.visibility = 'hidden';
+                horseEl.style.visibility = 'hidden';
+                mountedEl.style.left = (r.left - s.left) + 'px';
+                mountedEl.style.bottom = '6px';
+                mountedEl.classList.add('visible');
+                setState('mounted');
+                gsap.fromTo(mountedEl, { scale: 1.35, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: 'back.out(2)' });
+                startRide();
+              }
+            });
+          }
+
+          function startRide() {
+            const s = scene.getBoundingClientRect();
+            const left0 = parseFloat(mountedEl.style.left) || 0;
+            const rideW = Math.max(40, s.width - mountedEl.offsetWidth - left0 - 4);
+            const bob = mountedEl.offsetHeight * 0.04;
+            rideTl = gsap.timeline({ repeat: -1 });
+            rideTl
+              .to(mountedEl, { x: -rideW, duration: 1.4, ease: 'steps(9)' })
+              .to(mountedEl, { x: -rideW, scaleX: -1, duration: 0.5, ease: 'power1.inOut' })
+              .to(mountedEl, { x: 0, duration: 1.4, ease: 'steps(9)' })
+              .to(mountedEl, { x: 0, scaleX: 1, duration: 0.5, ease: 'power1.inOut' });
+            gsap.to(mountedEl, { y: bob, duration: 0.35, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+          }
+          function dismount() {
+            if (rideTl) { rideTl.kill(); rideTl = null; }
+            gsap.killTweensOf(mountedEl);
+            gsap.set(mountedEl, { x: 0, y: 0, rotation: 0, scaleX: 1 });
+            gsap.to(mountedEl, { scale: 1.2, opacity: 0, duration: 0.25, ease: 'power2.in',
+              onComplete: function () {
+                mountedEl.classList.remove('visible');
+                walker.style.visibility = '';
+                horseEl.style.visibility = '';
+                resetInlineLayout();
+                gsap.set(walker, { x: 0, y: 0, rotation: 0, scaleX: 1 });
+                startSequence();
+              }
+            });
+          }
+          mountedEl.addEventListener('click', dismount);
+
+          // ---- Drag-to-mount via interact.js (pointer based, mobile friendly) ----
+          let dragState = { active: false, mounted: false };
+
+          interact(walker).draggable({
+            inertia: false,
+            listeners: {
+              start: function () {
+                if (mountedEl.classList.contains('visible')) return;
+                dragState.active = true;
+                dragState.mounted = false;
+                pauseSequence();
+                setState('drag');
+                gsap.set(walker, { rotation: 0 });
+              },
+              move: function (event) {
+                const s = scene.getBoundingClientRect();
+                let nx = event.clientX - s.left - walker.offsetWidth / 2;
+                let ny = event.clientY - s.top - walker.offsetHeight / 2;
+                nx = Math.max(-30, Math.min(s.width - walker.offsetWidth + 30, nx));
+                ny = Math.max(-walker.offsetHeight, Math.min(s.height - 8, ny));
+                gsap.set(walker, { x: 0, y: 0, scaleX: 1, left: nx + 'px', top: ny + 'px', bottom: '' });
+              },
+              end: function () {
+                dragState.active = false;
+                if (dragState.mounted || mountedEl.classList.contains('visible')) return;
+                resetInlineLayout();
+                gsap.set(walker, { x: 0, y: 0, rotation: 0 });
+                startSequence();
+              }
+            }
+          });
+
+          interact(horseZone).dropzone({
+            accept: '#kingWalker',
+            overlap: 0.4,
+            ondrop: function () {
+              if (!dragState.active && !dragState.mounted) return;
+              dragState.mounted = true;
+              mountKing();
+            },
+            ondragenter: function () { horseZone.classList.add('drop-hover'); },
+            ondragleave: function () { horseZone.classList.remove('drop-hover'); },
+            ondropdeactivate: function () { horseZone.classList.remove('drop-hover'); }
+          });
+
+          startSequence();
+        }
+
+        function whenLibsReady() {
+          if (window.gsap && window.interact) { initKing(); return; }
+          if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            setTimeout(whenLibsReady, 80);
+          } else {
+            document.addEventListener('DOMContentLoaded', function () { setTimeout(whenLibsReady, 80); });
+          }
+        }
+        whenLibsReady();
+      })();
 
       // ---- Cursor glow (desktop) ----
       if (window.matchMedia('(pointer: fine)').matches) {
