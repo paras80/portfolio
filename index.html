@@ -1034,6 +1034,39 @@
         letter-spacing: -0.01em;
       }
 
+      @media (max-width: 640px) {
+        .skills-grid {
+          grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+          gap: 12px;
+        }
+        .skill-card {
+          padding: 20px 10px;
+          gap: 8px;
+        }
+        .skill-icon {
+          width: 44px;
+          height: 44px;
+        }
+        .skill-icon-img {
+          width: 32px;
+          height: 32px;
+        }
+      }
+
+      @media (max-width: 380px) {
+        .skills-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 10px;
+        }
+        .skill-card {
+          padding: 16px 6px;
+        }
+        .hero-card {
+          width: 240px;
+          height: 240px;
+        }
+      }
+
       /* ============================================
          TESTIMONIALS
          ============================================ */
@@ -1549,7 +1582,7 @@
               <div class="hero-orb hero-orb-2"></div>
               <div class="hero-orb hero-orb-3"></div>
               <a href="https://wa.me/919034430071" class="hero-card">
-                <img src="img/whatsapp-icon.png" alt="Contact Paras on WhatsApp">
+                <img src="img/whatsapp-icon.png" alt="Contact Paras on WhatsApp" width="640" height="640" fetchpriority="high" decoding="async">
               </a>
             </div>
             <p class="hero-caption">💬 Tap to chat on WhatsApp</p>
@@ -1688,35 +1721,35 @@
         </div>
         <div class="skills-grid">
           <div class="skill-card reveal reveal-delay-1">
-            <div class="skill-icon"><img class="skill-icon-img" src="https://skillicons.dev/icons?i=html" alt="HTML5 icon" loading="lazy" width="36" height="36"></div>
+            <div class="skill-icon"><img class="skill-icon-img" src="img/skills/html.svg" alt="HTML5 icon" loading="lazy" decoding="async" width="36" height="36"></div>
             <span class="skill-name">HTML5</span>
           </div>
           <div class="skill-card reveal reveal-delay-1">
-            <div class="skill-icon"><img class="skill-icon-img" src="https://skillicons.dev/icons?i=tailwind" alt="Tailwind CSS icon" loading="lazy" width="36" height="36"></div>
+            <div class="skill-icon"><img class="skill-icon-img" src="img/skills/tailwind.svg" alt="Tailwind CSS icon" loading="lazy" decoding="async" width="36" height="36"></div>
             <span class="skill-name">CSS / Tailwind</span>
           </div>
           <div class="skill-card reveal reveal-delay-2">
-            <div class="skill-icon"><img class="skill-icon-img" src="https://skillicons.dev/icons?i=javascript" alt="JavaScript icon" loading="lazy" width="36" height="36"></div>
+            <div class="skill-icon"><img class="skill-icon-img" src="img/skills/javascript.svg" alt="JavaScript icon" loading="lazy" decoding="async" width="36" height="36"></div>
             <span class="skill-name">JavaScript</span>
           </div>
           <div class="skill-card reveal reveal-delay-2">
-            <div class="skill-icon"><img class="skill-icon-img" src="https://skillicons.dev/icons?i=php" alt="PHP icon" loading="lazy" width="36" height="36"></div>
+            <div class="skill-icon"><img class="skill-icon-img" src="img/skills/php.svg" alt="PHP icon" loading="lazy" decoding="async" width="36" height="36"></div>
             <span class="skill-name">PHP</span>
           </div>
           <div class="skill-card reveal reveal-delay-3">
-            <div class="skill-icon"><img class="skill-icon-img" src="https://skillicons.dev/icons?i=nodejs" alt="Node.js icon" loading="lazy" width="36" height="36"></div>
+            <div class="skill-icon"><img class="skill-icon-img" src="img/skills/nodejs.svg" alt="Node.js icon" loading="lazy" decoding="async" width="36" height="36"></div>
             <span class="skill-name">Node.js</span>
           </div>
           <div class="skill-card reveal reveal-delay-3">
-            <div class="skill-icon"><img class="skill-icon-img" src="https://skillicons.dev/icons?i=express" alt="Express.js icon" loading="lazy" width="36" height="36"></div>
+            <div class="skill-icon"><img class="skill-icon-img" src="img/skills/express.svg" alt="Express.js icon" loading="lazy" decoding="async" width="36" height="36"></div>
             <span class="skill-name">Express.js</span>
           </div>
           <div class="skill-card reveal reveal-delay-4">
-            <div class="skill-icon"><img class="skill-icon-img" src="https://skillicons.dev/icons?i=mysql" alt="MySQL icon" loading="lazy" width="36" height="36"></div>
+            <div class="skill-icon"><img class="skill-icon-img" src="img/skills/mysql.svg" alt="MySQL icon" loading="lazy" decoding="async" width="36" height="36"></div>
             <span class="skill-name">MySQL</span>
           </div>
           <div class="skill-card reveal reveal-delay-5">
-            <div class="skill-icon"><img class="skill-icon-img" src="https://skillicons.dev/icons?i=firebase" alt="Firebase icon" loading="lazy" width="36" height="36"></div>
+            <div class="skill-icon"><img class="skill-icon-img" src="img/skills/firebase.svg" alt="Firebase icon" loading="lazy" decoding="async" width="36" height="36"></div>
             <span class="skill-name">Firebase</span>
           </div>
         </div>
