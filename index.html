@@ -690,12 +690,31 @@
         image-rendering: pixelated;
       }
 
+      .king-parallax {
+        position: absolute;
+        inset: 0;
+        background-image: url('img/pixel-parallax-bg-day.png');
+        background-repeat: repeat-x;
+        background-size: 384px 128px;
+        background-position: 0 0;
+        image-rendering: pixelated;
+        opacity: 0.95;
+        will-change: background-position;
+        z-index: 0;
+      }
+
+      [data-theme="dark"] .king-parallax {
+        background-image: url('img/pixel-parallax-bg-night.png');
+        opacity: 0.9;
+      }
+
       .king-ground {
         position: absolute;
         left: -2%; right: -2%; bottom: 6px;
         height: 26px;
-        background: linear-gradient(180deg, rgba(129,140,248,0.16) 0%, rgba(129,140,248,0.05) 55%, transparent 100%);
+        background: linear-gradient(180deg, var(--c-accent-glow) 0%, var(--c-accent-soft) 55%, transparent 100%);
         clip-path: polygon(0 0, 100% 0, 97% 100%, 3% 100%);
+        z-index: 1;
       }
 
       .king-ground::before {
@@ -712,15 +731,15 @@
         position: absolute;
         left: 10%; right: 10%; top: 6px;
         height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(129,140,248,0.25), transparent);
+        background: linear-gradient(90deg, transparent, var(--c-accent-glow), transparent);
       }
 
       .king-horse-zone {
         position: absolute;
         right: 4px;
         bottom: 6px;
-        width: 104px;
-        height: 80px;
+        width: 108px;
+        height: 100px;
         z-index: 1;
       }
 
@@ -729,10 +748,10 @@
         right: 4px;
         bottom: 6px;
         width: 96px;
-        height: 72px;
+        height: 96px;
         background-repeat: no-repeat;
         background-position: bottom right;
-        background-size: 96px 72px;
+        background-size: contain;
         image-rendering: pixelated;
         opacity: 0.95;
         filter: drop-shadow(0 2px 3px rgba(10,10,26,0.5));
@@ -816,7 +835,9 @@
         opacity: 0;
         pointer-events: none;
         z-index: 4;
+        cursor: grab;
         will-change: transform;
+        touch-action: none;
         --mount-fw: 128px;
         --mount-sheet-w: 1280px;
       }
@@ -824,11 +845,31 @@
       .king-mounted.visible {
         opacity: 1;
         pointer-events: auto;
-        cursor: pointer;
         animation: king-trot-frames 0.7s steps(9) infinite;
       }
 
+      .king-mounted.state-midle {
+        background-image: url('img/pixel-king-mounted-sheet.png');
+        background-size: var(--mount-sheet-w) var(--mount-fw);
+        animation: king-trot-frames 1.2s steps(9) infinite;
+      }
+
+      .king-mounted.state-mgallop {
+        background-image: url('img/pixel-king-mounted-gallop-sheet.png');
+        background-size: var(--mount-sheet-w) var(--mount-fw);
+        animation: king-gallop-frames 0.4s steps(9) infinite;
+      }
+
+      .king-mounted.dragging {
+        cursor: grabbing;
+      }
+
       @keyframes king-trot-frames {
+        from { background-position: 0 0; }
+        to   { background-position: calc(-1 * (var(--mount-sheet-w) - var(--mount-fw))) 0; }
+      }
+
+      @keyframes king-gallop-frames {
         from { background-position: 0 0; }
         to   { background-position: calc(-1 * (var(--mount-sheet-w) - var(--mount-fw))) 0; }
       }
@@ -849,8 +890,8 @@
 
       @media (min-width: 768px) {
         .king-scene { max-width: 320px; height: 140px; }
-        .king-horse-zone { right: 6px; width: 120px; height: 92px; }
-        .king-horse { right: 6px; width: 112px; height: 84px; background-size: 112px 84px; }
+        .king-horse-zone { right: 6px; width: 124px; height: 116px; }
+        .king-horse { right: 6px; width: 112px; height: 112px; background-size: contain; }
         .king-walker { width: 84px; height: 84px; --king-fw: 84px; --king-sheet-w: 840px; }
         .king-walk, .king-sprite { width: 84px; height: 84px; background-size: 84px 84px; }
         .king-walk { background-size: var(--king-sheet-w) var(--king-fw); }
@@ -1021,11 +1062,15 @@
 
       .project-thumb {
         position: relative;
+        display: block;
+        width: 100%;
         height: 200px;
         overflow: hidden;
       }
 
       .project-thumb img {
+        position: absolute;
+        inset: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -1364,80 +1409,41 @@
         flex-shrink: 0;
       }
 
-      .contact-form {
+      .contact-cta {
         display: flex;
         flex-direction: column;
-        gap: 20px;
-      }
-
-      .form-row {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
-      @media (min-width: 768px) {
-        .form-row-2 {
-          grid-template-columns: 1fr 1fr;
-        }
-      }
-
-      .form-group {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-      }
-
-      .form-label {
-        font-size: 0.8125rem;
-        font-weight: 600;
-        color: var(--c-text-secondary);
-      }
-
-      .form-input,
-      .form-select,
-      .form-textarea {
-        padding: 14px 18px;
-        font-family: var(--font-body);
-        font-size: 0.9375rem;
+        align-items: flex-start;
+        gap: 12px;
+        margin-top: 24px;
+        font-size: 1.125rem;
+        line-height: 1.6;
         color: var(--c-text-primary);
-        background: var(--c-bg);
-        border: 1px solid var(--c-border);
+      }
+
+      .contact-cta strong {
+        color: var(--c-accent);
+      }
+
+      .contact-email-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 22px;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--c-accent);
+        background: var(--c-accent-soft);
+        border: 1px solid var(--c-accent-glow);
         border-radius: var(--radius-lg);
-        outline: none;
-        transition: all var(--duration-fast) var(--ease-smooth);
+        transition: all var(--duration-normal) var(--ease-smooth);
       }
 
-      [data-theme="dark"] .form-input,
-      [data-theme="dark"] .form-select,
-      [data-theme="dark"] .form-textarea {
-        background: rgba(255,255,255,0.03);
-      }
-
-      .form-input:focus,
-      .form-select:focus,
-      .form-textarea:focus {
-        border-color: var(--c-accent);
-        box-shadow: 0 0 0 3px var(--c-accent-glow);
-      }
-
-      .form-input::placeholder,
-      .form-textarea::placeholder {
-        color: var(--c-text-tertiary);
-      }
-
-      .form-textarea {
-        resize: vertical;
-        min-height: 140px;
-      }
-
-      .form-select {
-        appearance: none;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2394a3b8'%3E%3Cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z'/%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: right 14px center;
-        background-size: 18px;
-        padding-right: 44px;
+      .contact-email-link:hover {
+        color: var(--c-bg);
+        background: linear-gradient(135deg, var(--c-gradient-start), var(--c-gradient-mid), var(--c-gradient-end));
+        border-color: transparent;
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg), 0 0 30px var(--c-accent-glow);
       }
 
       /* ============================================
@@ -1648,9 +1654,10 @@
               <svg class="hero-card-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             </a>
             <div class="king-scene" id="kingScene" aria-hidden="true">
+              <div class="king-parallax" id="kingParallax"></div>
               <div class="king-ground"></div>
               <div class="king-horse-zone" id="kingHorseZone">
-                <div class="king-horse" style="background-image:url('img/pixel-horse-transparent.png')"></div>
+                <div class="king-horse" style="background-image:url('img/pixel-horse-idle.png')"></div>
               </div>
               <div class="king-walker" id="kingWalker">
                 <div class="king-walk"></div>
@@ -1695,9 +1702,9 @@
           <div class="timeline reveal reveal-delay-2">
             <div class="timeline-item">
               <div class="timeline-dot"></div>
-              <h3 class="timeline-title">Senior Frontend Engineer</h3>
+              <h3 class="timeline-title">Senior FullStack Developer</h3>
               <p class="timeline-date">2020 — Present</p>
-              <p class="timeline-desc">Lead UI for dashboard used by 50k+ users. Building performant, accessible interfaces at scale.</p>
+              <p class="timeline-desc">Full Stack Developer apps with 50k+ users. Building performant, accessible interfaces at scale.</p>
             </div>
             <div class="timeline-item">
               <div class="timeline-dot"></div>
@@ -1716,73 +1723,7 @@
       </div>
     </section>
 
-    <!-- ========================
-         SELECTED WORK
-         ======================== -->
-    <section class="section projects-section" id="work">
-      <div class="container">
-        <div class="projects-header reveal">
-          <div>
-            <span class="section-label">Selected Work</span>
-            <h2 class="section-title">Projects I enjoyed building.</h2>
-            <p class="section-subtitle">A curated selection of recent work across dashboards, SaaS, and open-source.</p>
-          </div>
-          <a href="#contact" class="btn btn-secondary" style="display: none;" id="startProjectBtn">Start a project →</a>
-        </div>
-        <div class="projects-grid">
-          <article class="project-card reveal reveal-delay-1">
-            <a href="#" class="project-thumb">
-              <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1200&q=80&auto=format&fit=crop" alt="Analytics Dashboard project">
-              <div class="project-thumb-overlay"></div>
-            </a>
-            <div class="project-body">
-              <div class="project-tags">
-                <span class="tag">Node.js</span>
-                <span class="tag">Tailwind</span>
-                <span class="tag">MySQL</span>
-              </div>
-              <h3 class="project-title">Analytics Dashboard</h3>
-              <p class="project-desc">A modular, themable analytics suite with real‑time charts and role-based access control.</p>
-              <a href="#" class="project-link">View case study <span>↗</span></a>
-            </div>
-          </article>
-
-          <article class="project-card reveal reveal-delay-2">
-            <a href="#" class="project-thumb">
-              <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&q=80&auto=format&fit=crop" alt="SaaS Landing project">
-              <div class="project-thumb-overlay"></div>
-            </a>
-            <div class="project-body">
-              <div class="project-tags">
-                <span class="tag">Tailwind</span>
-                <span class="tag">PHP</span>
-              </div>
-              <h3 class="project-title">SaaS Landing + Billing</h3>
-              <p class="project-desc">High‑converting landing with Stripe billing, i18n, and A/B testing baked in.</p>
-              <a href="#" class="project-link">Live demo <span>↗</span></a>
-            </div>
-          </article>
-
-          <article class="project-card reveal reveal-delay-3">
-            <a href="#" class="project-thumb">
-              <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&q=80&auto=format&fit=crop" alt="UI Component Kit">
-              <div class="project-thumb-overlay"></div>
-            </a>
-            <div class="project-body">
-              <div class="project-tags">
-                <span class="tag">Tailwind</span>
-                <span class="tag">JavaScript</span>
-              </div>
-              <h3 class="project-title">UI Component Kit</h3>
-              <p class="project-desc">Accessible headless components with documentation, stories, and comprehensive tests.</p>
-              <a href="#" class="project-link">GitHub <span>↗</span></a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========================
+      <!-- ========================
          SKILLS
          ======================== -->
     <section class="section" id="skills">
@@ -1804,6 +1745,62 @@
         </div>
       </div>
     </section>
+
+
+    <!-- ========================
+         SELECTED WORK
+         ======================== -->
+    <section class="section projects-section" id="work">
+      <div class="container">
+        <div class="projects-header reveal">
+          <div>
+            <span class="section-label">Selected Work</span>
+            <h2 class="section-title">Projects I enjoyed building.</h2>
+            <p class="section-subtitle">A curated selection of recent work across dashboards, SaaS, and open-source.</p>
+          </div>
+          <a href="#contact" class="btn btn-secondary" style="display: none;" id="startProjectBtn">Start a project →</a>
+        </div>
+        <div class="projects-grid">
+
+          <article class="project-card reveal reveal-delay-3">
+            <a href="#" class="project-thumb">
+              <img src="img/project1.png" alt="UI Component Kit">
+              <div class="project-thumb-overlay"></div>
+            </a>
+            <div class="project-body">
+              <div class="project-tags">
+                <span class="tag">Tailwind</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">PHP</span>
+              </div>
+              <h3 class="project-title">AmbalaWatchCo.</h3>
+              <p class="project-desc">Ambala Watch Co. is community for watch lovers and watch enthusiasts</p>
+              <a href="https://github.com/paras80" target="_blank" rel="noopener noreferrer" class="project-link">Checkout <span>↗</span></a>
+            </div>
+          </article>
+        
+
+          <article class="project-card reveal reveal-delay-2">
+            <a href="#" class="project-thumb">
+              <img src="img/project2.png" alt="Google Chrome Theme">
+              <div class="project-thumb-overlay"></div>
+            </a>
+            <div class="project-body">
+              <div class="project-tags">
+                <span class="tag">Chrome</span>
+                <span class="tag">Theme</span>
+                <span class="tag">CSS</span>
+                <span class="tag">2016</span>
+              </div>
+              <h3 class="project-title">Google Chrome Theme</h3>
+              <p class="project-desc">A custom Google Chrome browser theme with a clean, Summer look.</p>
+              <a href="https://chromewebstore.google.com/detail/summer-holidays/mfecfgangbaamlkdcebkbngncpabddea target="_blank" rel="noopener noreferrer" class="project-link">Checkout <span>↗</span></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
 
     <!-- ========================
          TESTIMONIALS
@@ -1904,7 +1901,7 @@
               <div class="contact-info-icon">
                 <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
               </div>
-              <span>paraskaushal@gmail.com</span>
+              <a href="mailto:paraskaushal80@gmail.com" class="contact-email-link">paraskaushal80@gmail.com</a>
             </div>
             <div class="contact-info-item">
               <div class="contact-info-icon">
@@ -1914,37 +1911,7 @@
             </div>
 
           </div>
-          <div class="reveal reveal-delay-2">
-            <form class="contact-form" id="contactForm">
-              <div class="form-group">
-                <label for="name" class="form-label">Your name</label>
-                <input id="name" type="text" class="form-input" placeholder="Jane Doe" required>
-              </div>
-              <div class="form-row form-row-2">
-                <div class="form-group">
-                  <label for="email" class="form-label">Email</label>
-                  <input id="email" type="email" class="form-input" placeholder="you@company.com" required>
-                </div>
-                <div class="form-group">
-                  <label for="budget" class="form-label">Budget</label>
-                  <select id="budget" class="form-select">
-                    <option>₹25k – ₹50k</option>
-                    <option>₹50k – ₹1L</option>
-                    <option>₹1L – ₹3L</option>
-                    <option>₹3L+</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="message" class="form-label">Message</label>
-                <textarea id="message" class="form-textarea" placeholder="Project details, goals, timeline…"></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary" style="align-self: flex-start;">
-                <span>Send Message</span>
-                <span class="btn-arrow">→</span>
-              </button>
-            </form>
-          </div>
+
         </div>
       </div>
     </section>
@@ -1966,6 +1933,7 @@
          SCRIPTS
          ======================== -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/interactjs@1.10.27/dist/interact.min.js" defer></script>
     <script>
       // ---- Theme Toggle ----
@@ -2040,173 +2008,273 @@
         revealObserver.observe(el);
       });
 
-      // ---- King scene: walk/idle/wave + drag-to-mount (GSAP + interact.js) ----
+      // ---- King scene: state machine + GSAP motion + interact.js drag ----
       (function () {
         function initKing() {
           const scene = document.getElementById('kingScene');
           const walker = document.getElementById('kingWalker');
           const horseZone = document.getElementById('kingHorseZone');
           const mountedEl = document.getElementById('kingMounted');
-          if (!scene || !walker || !horseZone || !mountedEl) return;
+          const parallaxEl = document.getElementById('kingParallax');
+          if (!scene || !walker || !horseZone || !mountedEl || !parallaxEl) return;
 
           const walkEl = scene.querySelector('.king-walk');
           const horseEl = scene.querySelector('.king-horse');
           const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-          // ---- State machine (sprite/class swapping only) ----
-          const stateEls = { walk: walkEl, idle: scene.querySelector('.king-sprite-rest'), wave: scene.querySelector('.king-sprite-alert') };
-          function setState(name) {
-            walker.classList.remove('state-walk', 'state-idle', 'state-wave', 'state-drag', 'state-mounted');
-            if (name) walker.classList.add('state-' + name);
+          if (window.gsap && window.gsap.registerPlugin) {
+            try { gsap.registerPlugin(ScrollTrigger); } catch (e) {}
           }
 
-          // ---- Geometry helpers ----
-          function frameW() { return walker.offsetWidth; }
-          function roamMaxPct() {
-            const r = scene.getBoundingClientRect();
-            const h = horseZone.getBoundingClientRect();
-            if (!r.width) return 40;
-            const horseLeftPx = h.left - r.left;
-            const availPx = Math.max(20, horseLeftPx - 12 - walker.offsetWidth);
-            return (availPx / r.width) * 100;
-          }
-          function resetInlineLayout() {
-            walker.style.top = '';
-            walker.style.bottom = '6px';
-            walker.style.left = '2%';
-          }
-
-          // ---- Walk / idle / wave sequence (GSAP controls timing & positioning only) ----
-          let seq = null;
-          let rideTl = null;
-          function buildSequence() {
-            seq = gsap.timeline({ repeat: -1, defaults: { ease: 'power2.inOut' } });
-            seq
-              .call(() => { setState('walk'); gsap.set(walker, { x: 0, scaleX: 1 }); })
-              .to(walker, { left: () => roamMaxPct() + '%', duration: 2.6 })
-              .call(() => setState('idle'))
-              .to({}, { duration: 1.0 })
-              .call(() => setState('wave'))
-              .to(walker, { rotation: -14, duration: 0.18, ease: 'back.out(2)' })
-              .to(walker, { rotation: 10, duration: 0.22, ease: 'power2.inOut' })
-              .to(walker, { rotation: -8, duration: 0.22, ease: 'power2.inOut' })
-              .to(walker, { rotation: 0, duration: 0.18, ease: 'back.out(2)' })
-              .call(() => { setState('walk'); gsap.set(walker, { scaleX: -1 }); })
-              .to(walker, { left: '2%', duration: 2.6 })
-              .call(() => setState('idle'))
-              .to({}, { duration: 1.2 });
-          }
-          function startSequence() {
-            if (reduceMotion) { setState('idle'); return; }
-            if (!seq) buildSequence();
-            else seq.restart();
-          }
-          function pauseSequence() { if (seq) seq.pause(); }
-
-          // ---- Mount / dismount (GSAP snap + bounce) ----
-          function mountKing() {
-            pauseSequence();
-            setState(null);
-            const s = scene.getBoundingClientRect();
-            const r = horseZone.getBoundingClientRect();
-            const h = walker.getBoundingClientRect();
-            const dx = (r.left + r.width / 2) - (h.left + h.width / 2);
-            const dy = (r.top + r.height / 2) - (h.top + h.height / 2);
-            gsap.to(walker, {
-              x: '+=' + dx,
-              y: '+=' + dy,
-              scaleX: 1,
-              duration: 0.5,
-              ease: 'back.out(1.7)',
-              onComplete: function () {
-                walker.style.visibility = 'hidden';
-                horseEl.style.visibility = 'hidden';
-                mountedEl.style.left = (r.left - s.left) + 'px';
-                mountedEl.style.bottom = '6px';
-                mountedEl.classList.add('visible');
-                setState('mounted');
-                gsap.fromTo(mountedEl, { scale: 1.35, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: 'back.out(2)' });
-                startRide();
-              }
-            });
-          }
-
-          function startRide() {
-            const s = scene.getBoundingClientRect();
-            const left0 = parseFloat(mountedEl.style.left) || 0;
-            const rideW = Math.max(40, s.width - mountedEl.offsetWidth - left0 - 4);
-            const bob = mountedEl.offsetHeight * 0.04;
-            rideTl = gsap.timeline({ repeat: -1 });
-            rideTl
-              .to(mountedEl, { x: -rideW, duration: 1.4, ease: 'steps(9)' })
-              .to(mountedEl, { x: -rideW, scaleX: -1, duration: 0.5, ease: 'power1.inOut' })
-              .to(mountedEl, { x: 0, duration: 1.4, ease: 'steps(9)' })
-              .to(mountedEl, { x: 0, scaleX: 1, duration: 0.5, ease: 'power1.inOut' });
-            gsap.to(mountedEl, { y: bob, duration: 0.35, yoyo: true, repeat: -1, ease: 'sine.inOut' });
-          }
-          function dismount() {
-            if (rideTl) { rideTl.kill(); rideTl = null; }
-            gsap.killTweensOf(mountedEl);
-            gsap.set(mountedEl, { x: 0, y: 0, rotation: 0, scaleX: 1 });
-            gsap.to(mountedEl, { scale: 1.2, opacity: 0, duration: 0.25, ease: 'power2.in',
-              onComplete: function () {
-                mountedEl.classList.remove('visible');
-                walker.style.visibility = '';
-                horseEl.style.visibility = '';
-                resetInlineLayout();
-                gsap.set(walker, { x: 0, y: 0, rotation: 0, scaleX: 1 });
-                startSequence();
-              }
-            });
-          }
-          mountedEl.addEventListener('click', dismount);
-
-          // ---- Drag-to-mount via interact.js (pointer based, mobile friendly) ----
-          let dragState = { active: false, mounted: false };
-
-          interact(walker).draggable({
-            inertia: false,
-            listeners: {
-              start: function () {
-                if (mountedEl.classList.contains('visible')) return;
-                dragState.active = true;
-                dragState.mounted = false;
-                pauseSequence();
-                setState('drag');
-                gsap.set(walker, { rotation: 0 });
-              },
-              move: function (event) {
-                const s = scene.getBoundingClientRect();
-                let nx = event.clientX - s.left - walker.offsetWidth / 2;
-                let ny = event.clientY - s.top - walker.offsetHeight / 2;
-                nx = Math.max(-30, Math.min(s.width - walker.offsetWidth + 30, nx));
-                ny = Math.max(-walker.offsetHeight, Math.min(s.height - 8, ny));
-                gsap.set(walker, { x: 0, y: 0, scaleX: 1, left: nx + 'px', top: ny + 'px', bottom: '' });
-              },
-              end: function () {
-                dragState.active = false;
-                if (dragState.mounted || mountedEl.classList.contains('visible')) return;
-                resetInlineLayout();
-                gsap.set(walker, { x: 0, y: 0, rotation: 0 });
-                startSequence();
-              }
-            }
-          });
-
-          interact(horseZone).dropzone({
-            accept: '#kingWalker',
-            overlap: 0.4,
-            ondrop: function () {
-              if (!dragState.active && !dragState.mounted) return;
-              dragState.mounted = true;
-              mountKing();
+          // ============================================================
+          // MODULE 1: STATE MACHINE — sprite/class swapping only
+          // ============================================================
+          const StateMachine = {
+            current: null,
+            // walker states: walk | idle | wave | drag
+            setWalker: function (name) {
+              walker.classList.remove('state-walk', 'state-idle', 'state-wave', 'state-drag');
+              if (name) walker.classList.add('state-' + name);
             },
-            ondragenter: function () { horseZone.classList.add('drop-hover'); },
-            ondragleave: function () { horseZone.classList.remove('drop-hover'); },
-            ondropdeactivate: function () { horseZone.classList.remove('drop-hover'); }
+            // mounted states: mounted-idle | mounted-gallop
+            setMounted: function (name) {
+              mountedEl.classList.remove('state-midle', 'state-mgallop');
+              if (name) mountedEl.classList.add('state-' + name);
+              mountedEl.classList.toggle('visible', !!name);
+            },
+            mounted: function () { return mountedEl.classList.contains('visible'); }
+          };
+
+          // ============================================================
+          // MODULE 2: GSAP MOTION — timelines, parallax, scroll trigger
+          // ============================================================
+          const Motion = {
+            seq: null,
+            rideTl: null,
+            paraTl: null,
+            mountedTl: null,
+            scrollTl: null,
+
+            resetWalkerLayout: function () {
+              walker.style.top = '';
+              walker.style.bottom = '6px';
+              walker.style.left = '2%';
+              gsap.set(walker, { x: 0, y: 0, rotation: 0, scaleX: 1 });
+            },
+
+            roamMaxPct: function () {
+              const r = scene.getBoundingClientRect();
+              const h = horseZone.getBoundingClientRect();
+              if (!r.width) return 40;
+              const horseLeftPx = h.left - r.left;
+              const availPx = Math.max(20, horseLeftPx - 12 - walker.offsetWidth);
+              return (availPx / r.width) * 100;
+            },
+
+            // Pre-mount walk / idle / wave sequence
+            buildWalkSequence: function () {
+              const self = this;
+              self.seq = gsap.timeline({ repeat: -1, defaults: { ease: 'power2.inOut' } });
+              self.seq
+                .call(function () { StateMachine.setWalker('walk'); gsap.set(walker, { x: 0, scaleX: 1 }); })
+                .to(walker, { left: function () { return self.roamMaxPct() + '%'; }, duration: 2.6 })
+                .call(function () { StateMachine.setWalker('idle'); })
+                .to({}, { duration: 1.0 })
+                .call(function () { StateMachine.setWalker('wave'); })
+                .to(walker, { rotation: -14, duration: 0.18, ease: 'back.out(2)' })
+                .to(walker, { rotation: 10, duration: 0.22, ease: 'power2.inOut' })
+                .to(walker, { rotation: -8, duration: 0.22, ease: 'power2.inOut' })
+                .to(walker, { rotation: 0, duration: 0.18, ease: 'back.out(2)' })
+                .call(function () { StateMachine.setWalker('walk'); gsap.set(walker, { scaleX: -1 }); })
+                .to(walker, { left: '2%', duration: 2.6 })
+                .call(function () { StateMachine.setWalker('idle'); })
+                .to({}, { duration: 1.2 });
+            },
+
+            startWalk: function () {
+              if (reduceMotion) { StateMachine.setWalker('idle'); return; }
+              if (!this.seq) this.buildWalkSequence();
+              else this.seq.restart();
+            },
+            pauseWalk: function () { if (this.seq) this.seq.pause(); },
+
+            stopParallax: function () { if (this.paraTl) { this.paraTl.kill(); this.paraTl = null; } },
+
+            // Mounted: idle -> gallop across -> slow to stop -> idle
+            buildMountedSequence: function () {
+              const self = this;
+              this.mountedTl = gsap.timeline({ repeat: -1, defaults: { ease: 'power2.inOut' } });
+              this.mountedTl
+                .call(function () {
+                  StateMachine.setMounted('midle');
+                  gsap.set(mountedEl, { x: 0, y: 0, rotation: 0, scaleX: 1 });
+                  gsap.set(parallaxEl, { backgroundPosition: '0px 0px' });
+                })
+                .to({}, { duration: 1.2 })
+                .call(function () { StateMachine.setMounted('mgallop'); gsap.set(mountedEl, { scaleX: 1 }); })
+                .to(mountedEl, { x: 70, duration: 1.6, ease: 'power2.inOut' })
+                .to(parallaxEl, { backgroundPosition: '-240px 0px', duration: 1.6, ease: 'none' }, '<')
+                .to({}, { duration: 0.3 })
+                .call(function () { StateMachine.setMounted('midle'); })
+                .to({}, { duration: 1.0 })
+                .call(function () { StateMachine.setMounted('mgallop'); gsap.set(mountedEl, { scaleX: -1 }); })
+                .to(mountedEl, { x: -70, duration: 1.6, ease: 'power2.inOut' })
+                .to(parallaxEl, { backgroundPosition: '0px 0px', duration: 1.6, ease: 'none' }, '<')
+                .to({}, { duration: 0.3 });
+            },
+
+            playMounted: function () {
+              this.stopParallax();
+              if (!this.mountedTl) this.buildMountedSequence();
+              this.mountedTl.restart();
+            },
+            pauseMounted: function () { if (this.mountedTl) this.mountedTl.pause(); },
+            stopMounted: function () {
+              if (this.mountedTl) { this.mountedTl.pause(); this.mountedTl.progress(0); }
+              this.stopParallax();
+              StateMachine.setMounted(null);
+            },
+
+            // ScrollTrigger — replay sequence as the hero scrolls into view
+            setupScrollTrigger: function () {
+              if (!window.ScrollTrigger) return;
+              this.scrollTl = gsap.timeline({
+                scrollTrigger: {
+                  trigger: scene,
+                  start: 'top 85%',
+                  end: 'top 15%',
+                  toggleActions: 'play none none reverse',
+                  onEnter: function () { Motion.playMounted(); },
+                  onLeaveBack: function () { Motion.stopMounted(); }
+                }
+              });
+            }
+          };
+
+          // ============================================================
+          // MODULE 3: INTERACT.JS — drag + dropzone + inertia
+          // ============================================================
+          const Interact = {
+            dragState: { active: false, mounted: false },
+
+            init: function () {
+              interact(walker).draggable({
+                inertia: false,
+                listeners: {
+                  start: function () {
+                    if (StateMachine.mounted()) return;
+                    Interact.dragState.active = true;
+                    Interact.dragState.mounted = false;
+                    Motion.pauseWalk();
+                    StateMachine.setWalker('drag');
+                    gsap.set(walker, { rotation: 0 });
+                  },
+                  move: function (event) {
+                    const s = scene.getBoundingClientRect();
+                    let nx = event.clientX - s.left - walker.offsetWidth / 2;
+                    let ny = event.clientY - s.top - walker.offsetHeight / 2;
+                    nx = Math.max(-30, Math.min(s.width - walker.offsetWidth + 30, nx));
+                    ny = Math.max(-walker.offsetHeight, Math.min(s.height - 8, ny));
+                    gsap.set(walker, { x: 0, y: 0, scaleX: 1, left: nx + 'px', top: ny + 'px', bottom: '' });
+                  },
+                  end: function () {
+                    Interact.dragState.active = false;
+                    if (Interact.dragState.mounted || StateMachine.mounted()) return;
+                    Motion.resetWalkerLayout();
+                    Motion.startWalk();
+                  }
+                }
+              });
+
+              interact(horseZone).dropzone({
+                accept: '#kingWalker',
+                overlap: 0.4,
+                ondrop: function () {
+                  if (!Interact.dragState.active && !Interact.dragState.mounted) return;
+                  Interact.dragState.mounted = true;
+                  Interact.mountKing();
+                },
+                ondragenter: function () { horseZone.classList.add('drop-hover'); },
+                ondragleave: function () { horseZone.classList.remove('drop-hover'); },
+                ondropdeactivate: function () { horseZone.classList.remove('drop-hover'); }
+              });
+
+              // Mounted king+horse is draggable too — reposition anywhere + inertia glide
+              interact(mountedEl).draggable({
+                inertia: true,
+                listeners: {
+                  start: function () {
+                    if (!StateMachine.mounted()) return;
+                    Motion.pauseMounted();
+                    mountedEl.classList.add('dragging');
+                  },
+                  move: function (event) {
+                    const s = scene.getBoundingClientRect();
+                    let nx = event.clientX - s.left - mountedEl.offsetWidth / 2;
+                    let ny = event.clientY - s.top - mountedEl.offsetHeight / 2;
+                    nx = Math.max(-40, Math.min(s.width - mountedEl.offsetWidth + 40, nx));
+                    ny = Math.max(-mountedEl.offsetHeight, Math.min(s.height - 10, ny));
+                    gsap.set(mountedEl, { x: 0, y: 0, scaleX: 1, left: nx + 'px', top: ny + 'px', bottom: '' });
+                  },
+                  end: function () {
+                    mountedEl.classList.remove('dragging');
+                    if (StateMachine.mounted()) Motion.playMounted();
+                  }
+                }
+              });
+            },
+
+            mountKing: function () {
+              Motion.pauseWalk();
+              StateMachine.setWalker(null);
+              const s = scene.getBoundingClientRect();
+              const r = horseZone.getBoundingClientRect();
+              const h = walker.getBoundingClientRect();
+              const dx = (r.left + r.width / 2) - (h.left + h.width / 2);
+              const dy = (r.top + r.height / 2) - (h.top + h.height / 2);
+              gsap.to(walker, {
+                x: '+=' + dx,
+                y: '+=' + dy,
+                scaleX: 1,
+                duration: 0.5,
+                ease: 'back.out(1.7)',
+                onComplete: function () {
+                  walker.style.visibility = 'hidden';
+                  horseEl.style.visibility = 'hidden';
+                  mountedEl.style.left = (r.left - s.left) + 'px';
+                  mountedEl.style.bottom = '6px';
+                  mountedEl.style.top = '';
+                  gsap.fromTo(mountedEl,
+                    { scale: 1.35, opacity: 0, x: 0, y: 0 },
+                    { scale: 1, opacity: 1, duration: 0.45, ease: 'back.out(2)', onComplete: function () {
+                      StateMachine.setMounted('midle');
+                      Motion.playMounted();
+                      Motion.setupScrollTrigger();
+                    }
+                  });
+                }
+              });
+            },
+
+            dismount: function () {
+              Motion.stopMounted();
+              gsap.to(mountedEl, { scale: 1.2, opacity: 0, duration: 0.25, ease: 'power2.in',
+                onComplete: function () {
+                  StateMachine.setMounted(null);
+                  walker.style.visibility = '';
+                  horseEl.style.visibility = '';
+                  Motion.resetWalkerLayout();
+                  Motion.startWalk();
+                }
+              });
+            }
+          };
+
+          mountedEl.addEventListener('click', function (e) {
+            if (Interact.dragState.mounted && StateMachine.mounted()) Interact.dismount();
           });
 
-          startSequence();
+          Interact.init();
+          Motion.startWalk();
         }
 
         function whenLibsReady() {
